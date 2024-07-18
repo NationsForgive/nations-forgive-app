@@ -4,9 +4,6 @@ import {
   Grid,
   Button,
   TextField,
-  FormControl,
-  InputLabel,
-  Select,
   MenuItem,
   FormControlLabel,
   Checkbox,
@@ -22,7 +19,7 @@ const DEFAULT_VALUES_FORM = {
   name: null,
   email: null,
   phone: null,
-  contribution: 0,
+  contribution: 10,
   methodOfPayment: "",
   message: null,
   anonymous: false,
@@ -32,7 +29,7 @@ export default function DonationModal(props: {
   open: boolean;
   setOpenModal: Dispatch<SetStateAction<boolean>>;
 }) {
-  const { register, getValues, watch, reset } = useForm({
+  const { register, getValues, watch, reset, getFieldState } = useForm({
     defaultValues: DEFAULT_VALUES_FORM,
   });
 
@@ -62,11 +59,10 @@ export default function DonationModal(props: {
         reset(DEFAULT_VALUES_FORM);
         props.setOpenModal(false);
       } else {
-        console.error("There was a problem sending email. Pls try again!");
+        console.log("There was a problem sending email. Pls try again!");
       }
     } catch (error) {
       console.log("Error sending email:", error);
-      console.error("There was a problem sending email. Pls try again!");
     }
   };
 
@@ -101,68 +97,71 @@ export default function DonationModal(props: {
           sx={{ gridGap: 8 }}
         >
           <TextField
-            {...register("name")}
+            {...register("name", { required: true })}
             size="small"
             placeholder="Nombre completo"
             type="text"
             required
             fullWidth
             sx={{ backgroundColor: "#fff" }}
+            error={getFieldState("name").error ? true : false}
           />
           <Grid container spacing={1}>
             <Grid item xs={6}>
               <TextField
-                {...register("phone")}
+                {...register("phone", { required: true })}
                 size="small"
                 placeholder="Nro de telefono"
                 type="text"
                 required
                 fullWidth
                 sx={{ backgroundColor: "#fff" }}
+                error={getFieldState("phone").error ? true : false}
               />
             </Grid>
             <Grid item xs={6}>
               <TextField
-                {...register("email")}
+                {...register("email", { required: true })}
                 size="small"
                 placeholder="Correo electronico"
                 type="email"
                 required
                 fullWidth
                 sx={{ backgroundColor: "#fff" }}
+                error={getFieldState("email").error ? true : false}
               />
             </Grid>
           </Grid>
           <Grid container spacing={1}>
             <Grid item xs={6}>
               <TextField
-                {...register("contribution")}
+                {...register("contribution", { required: true, min: 1 })}
                 size="small"
                 placeholder="Cantidad a donar"
                 type="number"
                 required
                 fullWidth
                 sx={{ backgroundColor: "#fff" }}
+                error={getFieldState("contribution").error ? true : false}
               />
             </Grid>
             <Grid item xs={6}>
-              <FormControl fullWidth size="small">
-                <InputLabel id="methodOfPaymentSelect">
-                  Metodo de pago
-                </InputLabel>
-                <Select
-                  {...register("methodOfPayment")}
-                  labelId="methodOfPaymentSelect"
-                  id="demo-simple-select"
-                  value={10}
-                  label="Age"
-                  sx={{ backgroundColor: "#fff" }}
-                >
-                  <MenuItem value="paypal">Paypal</MenuItem>
-                  <MenuItem value="zelle">Transferencia Zelle</MenuItem>
-                  <MenuItem value="usdt">Transferencia USDT</MenuItem>
-                </Select>
-              </FormControl>
+              <TextField
+                {...register("methodOfPayment", { required: true })}
+                size="small"
+                placeholder="Metodo de pago"
+                label="Metodo de pago"
+                type="text"
+                select
+                required
+                fullWidth
+                sx={{ backgroundColor: "#fff" }}
+                error={getFieldState("methodOfPayment").error ? true : false}
+              >
+                <MenuItem value="paypal">Paypal</MenuItem>
+                <MenuItem value="zelle">Transferencia Zelle</MenuItem>
+                <MenuItem value="usdt">Transferencia USDT</MenuItem>
+              </TextField>
             </Grid>
           </Grid>
           <TextField
@@ -206,9 +205,12 @@ export default function DonationModal(props: {
           </PayPalScriptProvider>
         ) : (
           <Button
+            type="submit"
             variant="contained"
             sx={{ width: "250px" }}
-            onClick={() => sendContributionEmail()}
+            onSubmit={() => {
+              sendContributionEmail();
+            }}
           >
             Enviar contribucion
           </Button>
