@@ -8,11 +8,13 @@ import {
   FormControlLabel,
   Checkbox,
   Modal,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
 import axios from "axios";
 import Image from "next/image";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { useForm } from "react-hook-form";
 
 const DEFAULT_VALUES_FORM = {
@@ -29,8 +31,15 @@ export default function DonationModal(props: {
   open: boolean;
   setOpenModal: Dispatch<SetStateAction<boolean>>;
 }) {
-  const { register, getValues, watch, reset, getFieldState } = useForm({
-    defaultValues: DEFAULT_VALUES_FORM,
+  const { register, getValues, watch, reset, getFieldState, trigger } = useForm(
+    {
+      defaultValues: DEFAULT_VALUES_FORM,
+    }
+  );
+  const [openSnackbar, setOpenSnackbar] = useState({
+    isOpen: false,
+    isError: false,
+    message: "",
   });
 
   const paypalCreateOrder = async () => {
@@ -57,7 +66,12 @@ export default function DonationModal(props: {
       // handle success
       if (response.ok) {
         reset(DEFAULT_VALUES_FORM);
-        props.setOpenModal(false);
+        setOpenSnackbar({
+          isOpen: true,
+          isError: false,
+          message: "GRACIAS!! por tu contribucion",
+        });
+        setTimeout(() => props.setOpenModal(false), 2000);
       } else {
         console.log("There was a problem sending email. Pls try again!");
       }
@@ -193,9 +207,19 @@ export default function DonationModal(props: {
                 height: 40,
               }}
               createOrder={async () => {
-                const order = await paypalCreateOrder();
-
-                return order + "";
+                const withoutErrors = await trigger();
+                if (withoutErrors) {
+                  const order = await paypalCreateOrder();
+                  return order + "";
+                } else {
+                  setOpenSnackbar({
+                    isOpen: true,
+                    isError: false,
+                    message:
+                      "Verifique que todos los campos esten correctamente rellenos",
+                  });
+                  return "";
+                }
               }}
               onApprove={async (data, actions) => {
                 sendContributionEmail();
@@ -205,11 +229,20 @@ export default function DonationModal(props: {
           </PayPalScriptProvider>
         ) : (
           <Button
-            type="submit"
             variant="contained"
             sx={{ width: "250px" }}
-            onSubmit={() => {
-              sendContributionEmail();
+            onClick={async () => {
+              const withoutErrors = await trigger();
+              if (withoutErrors) {
+                sendContributionEmail();
+              } else {
+                setOpenSnackbar({
+                  isOpen: true,
+                  isError: false,
+                  message:
+                    "Verifique que todos los campos esten correctamente rellenos",
+                });
+              }
             }}
           >
             Enviar contribucion
@@ -222,6 +255,26 @@ export default function DonationModal(props: {
         >
           Cancelar
         </Button>
+        <Snackbar
+          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+          open={openSnackbar.isOpen}
+          autoHideDuration={3000}
+        >
+          <Alert
+            severity={openSnackbar.isError ? "warning" : "success"}
+            variant="filled"
+            sx={{ width: "100%" }}
+            onClose={() =>
+              setOpenSnackbar({
+                isOpen: false,
+                isError: false,
+                message: "",
+              })
+            }
+          >
+            {openSnackbar.message}
+          </Alert>
+        </Snackbar>
       </Box>
     </Modal>
   );

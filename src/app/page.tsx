@@ -205,8 +205,9 @@ export default function Home() {
               <Grid item md={3.5}>
                 <ContactCard title="Dirección" icon={<FmdGoodOutlinedIcon />}>
                   <Typography variant="body2">
-                    Calle 30 entre Avda. 38 y 39 Sector Paraguay, antiguo Motel
-                    Fritz, detrás de Ipostel. Acarigua Edo. Portuguesa
+                    Dirección Física: Raleigh NC 3413 arctic brook st Cod
+                    <br />
+                    Postal: 27604
                   </Typography>
                 </ContactCard>
               </Grid>
@@ -244,7 +245,7 @@ export default function Home() {
                       </IconButton>
                     </a>
                     <a
-                      href="https://www.facebook.com/CentroCristianoAA1"
+                      href="https://www.facebook.com/profile.php?id=61562155940316"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -253,7 +254,7 @@ export default function Home() {
                       </IconButton>
                     </a>
                     <a
-                      href="https://www.instagram.com/ccacarigua/"
+                      href="https://www.instagram.com/nationsforgive/"
                       target="_blank"
                       rel="noopener noreferrer"
                     >

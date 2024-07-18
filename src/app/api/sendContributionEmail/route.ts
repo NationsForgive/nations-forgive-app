@@ -23,7 +23,7 @@ function htmlForContributor(requestBody: EmailTemplateProps) {
       <br />
       <br />
       <h5>
-        Facebook:{" "}
+        Facebook:
         <a
           href="https://www.facebook.com/CentroCristianoAA1"
           target="_blank"
@@ -33,7 +33,7 @@ function htmlForContributor(requestBody: EmailTemplateProps) {
         </a>
       </h5>
       <h5>
-        Instagram:{" "}
+        Instagram:
         <a
           href="https://www.instagram.com/ccacarigua/"
           target="_blank"
@@ -43,7 +43,7 @@ function htmlForContributor(requestBody: EmailTemplateProps) {
         </a>
       </h5>
       <h5>
-        Youtube:{" "}
+        Youtube:
         <a
           href="https://www.youtube.com/@centrocristianoaa"
           target="_blank"
@@ -53,7 +53,7 @@ function htmlForContributor(requestBody: EmailTemplateProps) {
         </a>
       </h5>
       <h5>
-        Sitio web:{" "}
+        Sitio web:
         <a
           href="https://nations-forgive.org/"
           target="_blank"
@@ -72,7 +72,7 @@ function htmlForOrganization(requestBody: EmailTemplateProps) {
         La persona de nombre: ${
           requestBody.name
         }, ha realizado la contribución a
-        través del canal {requestBody.methodOfPayment} de una cantidad USD{" "}
+        través del canal {requestBody.methodOfPayment} de una cantidad USD
         ${requestBody.contribution}
         .
         <br />
