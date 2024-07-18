@@ -12,6 +12,33 @@ const theme = createTheme({
   typography: {
     fontFamily: roboto.style.fontFamily,
   },
+  palette: {
+    primary: {
+      main: "#198754",
+    },
+  },
+  components: {
+    MuiAppBar: {
+      styleOverrides: {
+        colorPrimary: {
+          backgroundColor: "#EBFAF9",
+        },
+      },
+    },
+    MuiButton: {
+      styleOverrides: {
+        contained: {
+          borderRadius: 8,
+        },
+        outlined: {
+          borderRadius: 8,
+        },
+        text: {
+          borderRadius: 8,
+        },
+      },
+    },
+  },
 });
 
 export default theme;

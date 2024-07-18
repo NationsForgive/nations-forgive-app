@@ -11,10 +11,13 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import Image from "next/image";
 import { useState, MouseEvent } from "react";
+import DonationModal from "./DonationModal";
 
 const pages = ["Sobre nosotros", "Encuentranos", "Servicios"];
 
 export default function CustomAppBar() {
+  const [donationModal, setDonationModal] = useState(false);
+
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
@@ -25,8 +28,8 @@ export default function CustomAppBar() {
     setAnchorElNav(null);
   };
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
+    <AppBar position="fixed" elevation={0} sx={{ backgroundColor: "#EBFAF9" }}>
+      <Container>
         <Toolbar disableGutters>
           <Image src="/Logo.png" alt="Logo" width={48} height={48} priority />
           <Box
@@ -40,6 +43,7 @@ export default function CustomAppBar() {
               <Button
                 key={page}
                 onClick={() => {}}
+                variant="text"
                 sx={{ my: 2, color: "white", display: "block" }}
               >
                 {page}
@@ -51,6 +55,7 @@ export default function CustomAppBar() {
               display: { xs: "none", md: "flex" },
             }}
             variant="contained"
+            onClick={() => setDonationModal(true)}
           >
             Contribuye con nosotros
           </Button>
@@ -96,12 +101,18 @@ export default function CustomAppBar() {
                 </MenuItem>
               ))}
               <MenuItem>
-                <Button variant="contained">Contribuye con nosotros</Button>
+                <Button
+                  variant="contained"
+                  onClick={() => setDonationModal(true)}
+                >
+                  Contribuye con nosotros
+                </Button>
               </MenuItem>
             </Menu>
           </Box>
         </Toolbar>
       </Container>
+      <DonationModal open={donationModal} setOpenModal={setDonationModal} />
     </AppBar>
   );
 }

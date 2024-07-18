@@ -1,24 +1,25 @@
-import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
+import CssBaseline from "@mui/material/CssBaseline";
 import { StyledRoot } from "./StyledRoot";
-import CustomAppBar from "./AppBar";
-import { Container } from "@mui/material";
+import CustomAppBar from "@/components/AppBar";
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const pages = ["Sobre nosotros", "Encuentranos", "Servicios"];
   return (
     <html lang="en">
       <body>
         <AppRouterCacheProvider>
-          <CustomAppBar />
+          <CssBaseline />
           <StyledRoot>
-            <Container>{children}</Container>
+            <CustomAppBar />
+            {children}
           </StyledRoot>
-          <div>Footer</div>
         </AppRouterCacheProvider>
       </body>
     </html>
