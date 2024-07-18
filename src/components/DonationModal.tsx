@@ -60,6 +60,7 @@ export default function DonationModal(props: {
       // handle success
       if (response.ok) {
         reset(DEFAULT_VALUES_FORM);
+        props.setOpenModal(false);
       } else {
         console.error("There was a problem sending email. Pls try again!");
       }
@@ -73,6 +74,7 @@ export default function DonationModal(props: {
     <Modal
       open={props.open}
       onClose={() => props.setOpenModal(!props.open)}
+      sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
@@ -82,10 +84,9 @@ export default function DonationModal(props: {
         justifyContent="space-between"
         alignItems="center"
         flexDirection="column"
-        height="100%"
+        height="auto"
         width="100%"
         maxWidth={500}
-        maxHeight={550}
         bgcolor="#EBFAF9"
         borderRadius="8px"
         padding={5}
@@ -212,6 +213,13 @@ export default function DonationModal(props: {
             Enviar contribucion
           </Button>
         )}
+        <Button
+          variant="text"
+          sx={{ width: "150px" }}
+          onClick={() => props.setOpenModal(false)}
+        >
+          Cancelar
+        </Button>
       </Box>
     </Modal>
   );

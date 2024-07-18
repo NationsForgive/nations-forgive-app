@@ -176,9 +176,7 @@ export default function Home() {
                 </Grid>
               </Grid>
             </Paper>
-            <Box>
-              <SliderImages />
-            </Box>
+            <Box>{/* <SliderImages /> */}</Box>
             <Button variant="outlined" sx={{ maxWidth: "250px" }}>
               Conócenos más
             </Button>
@@ -236,42 +234,33 @@ export default function Home() {
                     width="100%"
                     sx={{ gridGap: 10 }}
                   >
-                    <IconButton
-                      onClick={() => {
-                        window
-                          .open(
-                            "https://www.youtube.com/@centrocristianoaa",
-                            "_blank"
-                          )
-                          .focus();
-                      }}
+                    <a
+                      href="https://www.youtube.com/@centrocristianoaa"
+                      target="_blank"
+                      rel="noopener noreferrer"
                     >
-                      <YouTubeIcon />
-                    </IconButton>
-                    <IconButton
-                      onClick={() => {
-                        window
-                          .open(
-                            "https://www.facebook.com/CentroCristianoAA1",
-                            "_blank"
-                          )
-                          .focus();
-                      }}
+                      <IconButton>
+                        <YouTubeIcon />
+                      </IconButton>
+                    </a>
+                    <a
+                      href="https://www.facebook.com/CentroCristianoAA1"
+                      target="_blank"
+                      rel="noopener noreferrer"
                     >
-                      <FacebookOutlinedIcon />
-                    </IconButton>
-                    <IconButton
-                      onClick={() => {
-                        window
-                          .open(
-                            "https://www.instagram.com/ccacarigua/",
-                            "_blank"
-                          )
-                          .focus();
-                      }}
+                      <IconButton>
+                        <FacebookOutlinedIcon />
+                      </IconButton>
+                    </a>
+                    <a
+                      href="https://www.instagram.com/ccacarigua/"
+                      target="_blank"
+                      rel="noopener noreferrer"
                     >
-                      <InstagramIcon />
-                    </IconButton>
+                      <IconButton>
+                        <InstagramIcon />
+                      </IconButton>
+                    </a>
                   </Box>
                 </ContactCard>
               </Grid>
