@@ -12,10 +12,23 @@ import MenuItem from "@mui/material/MenuItem";
 import Image from "next/image";
 import { useState, MouseEvent } from "react";
 import DonationModal from "./DonationModal";
+import { usePathname } from "next/navigation";
 
-const pages = ["Sobre nosotros", "Encuentranos", "Servicios"];
+const pages = [
+  {
+    text: "Inicio",
+    route: "/",
+  },
+  {
+    text: "Sobre nosotros",
+    route: "/about",
+  },
+  { text: "Encuentranos", route: "#contact" },
+  { text: "Servicios", route: "/services" },
+];
 
 export default function CustomAppBar() {
+  const pathname = usePathname();
   const [donationModal, setDonationModal] = useState(false);
 
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
@@ -39,15 +52,22 @@ export default function CustomAppBar() {
               justifyContent: "center",
             }}
           >
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={() => {}}
-                variant="text"
-                sx={{ my: 2, color: "white", display: "block" }}
+            {pages.map((page, index) => (
+              <a
+                href={
+                  pathname === "/" ? page.route.replace("/", "#") : page.route
+                }
+                key={index}
+                style={{ textDecoration: "none", color: "black" }}
               >
-                {page}
-              </Button>
+                <Button
+                  variant="text"
+                  sx={{ my: 2, display: "block" }}
+                  color="inherit"
+                >
+                  {page.text}
+                </Button>
+              </a>
             ))}
           </Box>
           <Button
@@ -73,7 +93,7 @@ export default function CustomAppBar() {
               aria-controls="menu-appbar"
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
-              color="inherit"
+              color="primary"
             >
               <MenuIcon />
             </IconButton>
@@ -95,10 +115,22 @@ export default function CustomAppBar() {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
+              {pages.map((page, index) => (
+                <a
+                  href={
+                    pathname === "/" ? page.route.replace("/", "#") : page.route
+                  }
+                  key={index}
+                  style={{ textDecoration: "none", color: "black" }}
+                >
+                  <Button
+                    variant="text"
+                    sx={{ my: 2, display: "block" }}
+                    color="inherit"
+                  >
+                    {page.text}
+                  </Button>
+                </a>
               ))}
               <MenuItem>
                 <Button
