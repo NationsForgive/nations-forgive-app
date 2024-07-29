@@ -23,13 +23,32 @@ import SliderImages from "../components/SliderImages";
 import { useState } from "react";
 import DonationModal from "../components/DonationModal";
 
+const metricsData = [
+  {
+    title: "Proyectos",
+    value: "3",
+  },
+  {
+    title: "Fondos Recaudados",
+    value: "$10K",
+  },
+  {
+    title: "Personas Ayudadas",
+    value: "10K",
+  },
+  {
+    title: "Comunidades Ayudadas",
+    value: "8",
+  },
+];
+
 export default function Home() {
   const theme = useTheme();
   const isExtraSmallSize = useMediaQuery(theme.breakpoints.up("md"));
   const [donationModal, setDonationModal] = useState(false);
   return (
     <>
-      <Box component="section" sx={{ bgcolor: "#EBFAF9" }} paddingTop={10}>
+      <Box component="section" paddingTop={10}>
         <Container>
           <Box padding={{ xs: 0, md: 5 }} paddingY={{ xs: 5 }}>
             <Grid container spacing={{ xs: 2, md: 5 }}>
@@ -53,15 +72,17 @@ export default function Home() {
               <Grid
                 item
                 md={4}
-                sx={{
-                  display: "flex",
-                  width: "100%",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  flexDirection: "column",
-                }}
+                display="flex"
+                width="100%"
+                justifyContent="space-between"
+                alignItems="center"
+                flexDirection="column"
               >
-                <Typography variant="body1" textAlign="justify">
+                <Typography
+                  variant="body1"
+                  textAlign="justify"
+                  sx={{ marginBottom: 5 }}
+                >
                   Lorem Ipsum is simply dummy text of the printing and
                   typesetting industry. Lorem Ipsum has been the industrys
                   standard dummy text ever since the 1500s, when an unknown
@@ -81,7 +102,47 @@ export default function Home() {
           </Box>
         </Container>
       </Box>
-      <Box component="section" id="about">
+      <Box
+        component="section"
+        width="100%"
+        marginTop={{ sx: 2, md: 5 }}
+        paddingY={2}
+        bgcolor="#DE5F6A"
+      >
+        <Container>
+          <Box
+            display="flex"
+            justifyContent="space-around"
+            overflow="auto"
+            sx={{
+              gridGap: 20,
+              marginTop: {
+                md: "-60px",
+                sx: "0",
+              },
+            }}
+            alignItems="center"
+          >
+            {metricsData.map((e, index) => (
+              <Paper
+                elevation={5}
+                sx={{
+                  borderRadius: "8px",
+                }}
+                key={index}
+              >
+                <Box padding={4} textAlign="center" width="225px">
+                  <Typography variant="subtitle2">{e.title}</Typography>
+                  <Typography variant="h4" marginTop={2} fontWeight="bold">
+                    {e.value}
+                  </Typography>
+                </Box>
+              </Paper>
+            ))}
+          </Box>
+        </Container>
+      </Box>
+      <Box component="section" id="about" sx={{ bgcolor: "#FFE4E7" }}>
         <Container>
           <Box
             display="flex"
@@ -92,35 +153,67 @@ export default function Home() {
             padding={{ xs: 0, md: 5 }}
             paddingY={{ xs: 5 }}
           >
-            <Box marginBottom={4} textAlign="center">
+            <Box marginBottom={2} textAlign="center">
               <Typography variant="h5">Sobre nosotros</Typography>
             </Box>
-            <Grid
-              container
-              spacing={{ xs: 2, md: 5 }}
-              flexDirection={{ xs: "column-reverse", md: "row" }}
-            >
+            <Grid container spacing={{ xs: 2, md: 5 }}>
               <Grid
                 item
                 md={6}
                 sx={{ width: "100%", justifyContent: "center" }}
               >
-                <Typography variant="body1" textAlign="justify">
-                  La Iglesia Centro Cristiano Acarigua Araure es una extensión
-                  de la Iglesia Centro Cristiano Cúcuta-Los Pinos, pastoreada
-                  por el pastor José Satirio Dos Santos y su esposa. Surgió tras
-                  un viaje a Venezuela, cuando al entrar en Acarigua, se
-                  preguntó si había alguna sede del Centro Cristiano, pero la
-                  respuesta fue negativa. Años después, la familia
-                  Romero-Eugenio, originaria de Cúcuta, se dirigió a
-                  Barquisimeto en busca de pastores para Acarigua y Araure.
-                  Comenzaron con un grupo bíblico y, tras varios años, se
-                  establecieron en diferentes locales. Actualmente, la iglesia
-                  cuenta con una membresía de aproximadamente 1450 personas y
-                  tiene la visión de construir un templo para 2200 personas. Su
-                  misión es conquistar la ciudad y ofrecer un refugio espiritual
-                  a las personas de las ciudades gemelas.
-                </Typography>
+                <Box display="flex" flexDirection="column">
+                  <Typography variant="body1" textAlign="justify">
+                    Somos una organización que funge como "Fundraising
+                    Platform", dedicada a la recaudación de recursos financieros
+                    y no financieros para proyectos sociales y humanitarios, que
+                    están enfocados hacia comunidades venezolanas en condiciones
+                    críticas y de extrema pobreza, que son fomentados y
+                    gestionados desde la comunidad cristiana con sede en
+                    Venezuela.
+                  </Typography>
+                  <Paper
+                    elevation={5}
+                    sx={{ borderRadius: "8px", marginTop: 2 }}
+                  >
+                    <Grid
+                      container
+                      spacing={{ xs: 3, md: 5 }}
+                      padding={4}
+                      flexDirection="column"
+                    >
+                      <Grid
+                        item
+                        md={12}
+                        display="flex"
+                        flexDirection="column"
+                        textAlign="center"
+                      >
+                        <Typography variant="h6">Mision</Typography>
+                        <Typography variant="body2" textAlign="center">
+                          Impulsar programas que redunden en beneficio de la
+                          familia, estableciendo como estrategia campañas de
+                          divulgación que promuevan el bienestar de los miembros
+                          de la familia.
+                        </Typography>
+                      </Grid>
+                      <Grid
+                        item
+                        md={12}
+                        display="flex"
+                        flexDirection="column"
+                        textAlign="center"
+                      >
+                        <Typography variant="h6">Vision</Typography>
+                        <Typography variant="body2" textAlign="center">
+                          Ser una organización de alcance, que contribuya a la
+                          sanidad y fortalecimiento de la familia y sus
+                          miembros.
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                  </Paper>
+                </Box>
               </Grid>
               <Grid
                 item
@@ -143,52 +236,14 @@ export default function Home() {
                 ></iframe>
               </Grid>
             </Grid>
-            <Paper elevation={5} sx={{ borderRadius: "8px" }}>
-              <Grid container spacing={{ xs: 3, md: 5 }} padding={4}>
-                <Grid
-                  item
-                  md={6}
-                  sx={{ width: "100%", justifyContent: "center" }}
-                >
-                  <Box display="flex" flexDirection="column" textAlign="center">
-                    <Typography variant="h6">Mision</Typography>
-                    <Typography variant="body2" textAlign="justify">
-                      Buscamos a hombres y mujeres que no conocen de Jesucristo
-                      y los guiamos a la salvación. Luego los discipulamos y
-                      capacitamos para que asuman un compromiso con Cristo y con
-                      su iglesia. Formamos de ellos líderes autónomos,
-                      responsables y trascendentes. Levantando así una
-                      generación de conquista, consumadores de la palabra y
-                      dispuestos a llevar el Evangelio sin mirar el precio.
-                      Mateo 28.19-20.
-                    </Typography>
-                  </Box>
-                </Grid>
-                <Grid
-                  item
-                  md={6}
-                  sx={{ width: "100%", justifyContent: "center" }}
-                >
-                  <Box display="flex" flexDirection="column" textAlign="center">
-                    <Typography variant="h6">Vision</Typography>
-                    <Typography variant="body2" textAlign="justify">
-                      Hacer de Acarigua, de la región y de Venezuela, espacios
-                      donde el amor y los principios del Reino de Dios estén
-                      presentes en todas las áreas de la vida personal y social,
-                      como modelo y plataforma de la misión mundial. Hechos 1:8.
-                    </Typography>
-                  </Box>
-                </Grid>
-              </Grid>
-            </Paper>
-            <Box>{/* <SliderImages /> */}</Box>
-            <Button variant="outlined" sx={{ maxWidth: "250px" }}>
+            <SliderImages />
+            {/* <Button variant="outlined" sx={{ maxWidth: "250px" }}>
               Conócenos más
-            </Button>
+            </Button> */}
           </Box>
         </Container>
       </Box>
-      <Box component="section" sx={{ bgcolor: "#EBFAF9" }} id="contact">
+      <Box component="section" id="contact">
         <Container>
           <Box
             component="section"
@@ -221,14 +276,14 @@ export default function Home() {
                   <Typography variant="body2">+58 414-3746893</Typography>
                 </ContactCard>
               </Grid>
-              <Grid item md={2.5}>
+              <Grid item md={3.5}>
                 <ContactCard title="Email" icon={<EmailOutlinedIcon />}>
                   <Typography variant="body2">
-                    multimediaccaa@gmail.com
+                    nationsforgivefundraising@gmail.com
                   </Typography>
                 </ContactCard>
               </Grid>
-              <Grid item md={3.5}>
+              <Grid item md={2.5}>
                 <ContactCard
                   title="Síguenos"
                   icon={<AccountCircleOutlinedIcon />}
@@ -241,7 +296,7 @@ export default function Home() {
                     sx={{ gridGap: 10 }}
                   >
                     <a
-                      href="https://www.youtube.com/@centrocristianoaa"
+                      href="https://www.youtube.com/@fundraisingnationsforgive"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -279,7 +334,7 @@ export default function Home() {
             >
               <Grid item md={6}>
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d983.6260542000132!2d-69.206539!3d9.55173!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e7dc140eddaef8b%3A0xff3f7e817e8d83aa!2sCENTRO%20CRISTIANO!5e0!3m2!1ses!2sve!4v1721186462081!5m2!1ses!2sve"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3235.5050266242224!2d-78.52519392347122!3d35.81208297254543!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89ac5b9d0f265d97%3A0x5f1fd86b11eb2de9!2s3413%20Arctic%20Brook%20St%2C%20Raleigh%2C%20NC%2027604%2C%20EE.%20UU.!5e0!3m2!1ses!2sve!4v1721865994829!5m2!1ses!2sve"
                   width="100%"
                   height={isExtraSmallSize ? "400" : "250"}
                   style={{ border: 0, borderRadius: "8px" }}

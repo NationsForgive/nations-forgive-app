@@ -28,7 +28,7 @@ export default function ContactCard(props: {
             width="35px"
             height="35px"
             borderRadius="8px"
-            border="1px solid #198754"
+            border="1px solid #7A1527"
             bgcolor="white"
             display="flex"
             justifyContent="center"

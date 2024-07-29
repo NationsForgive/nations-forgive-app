@@ -14,14 +14,14 @@ const theme = createTheme({
   },
   palette: {
     primary: {
-      main: "#198754",
+      main: "#7A1527",
     },
   },
   components: {
     MuiAppBar: {
       styleOverrides: {
         colorPrimary: {
-          backgroundColor: "#EBFAF9",
+          backgroundColor: "#FFE4E7",
         },
       },
     },
@@ -37,6 +37,9 @@ const theme = createTheme({
           borderRadius: 8,
         },
       },
+    },
+    MuiTextField: {
+      styleOverrides: {},
     },
   },
 });

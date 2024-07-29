@@ -24,7 +24,7 @@ const pages = [
     route: "/about",
   },
   { text: "Encuentranos", route: "#contact" },
-  { text: "Servicios", route: "/services" },
+  // { text: "Servicios", route: "/services" },
 ];
 
 export default function CustomAppBar() {
@@ -41,10 +41,10 @@ export default function CustomAppBar() {
     setAnchorElNav(null);
   };
   return (
-    <AppBar position="fixed" elevation={0} sx={{ backgroundColor: "#EBFAF9" }}>
+    <AppBar position="fixed" elevation={0} sx={{ backgroundColor: "#FFE4E7" }}>
       <Container>
         <Toolbar disableGutters>
-          <Image src="/Logo.png" alt="Logo" width={48} height={48} priority />
+          <Image src="/Logo.png" alt="Logo" width={120} height={40} priority />
           <Box
             sx={{
               flexGrow: 1,

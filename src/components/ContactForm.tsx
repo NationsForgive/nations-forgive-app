@@ -55,7 +55,7 @@ export default function ContactForm() {
       height="100%"
       sx={{ gridGap: 15 }}
     >
-      <Image src="/Logo.png" alt="Logo" width={80} height={80} priority />
+      <Image src="/Logo2.png" alt="Logo" width={80} height={80} priority />
 
       <Box width="100%">
         <Grid container spacing={1}>

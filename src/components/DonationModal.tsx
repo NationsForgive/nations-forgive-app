@@ -97,12 +97,12 @@ export default function DonationModal(props: {
         height="auto"
         width="100%"
         maxWidth={500}
-        bgcolor="#EBFAF9"
+        bgcolor="#ffff"
         borderRadius="8px"
         padding={5}
         sx={{ gridGap: 25 }}
       >
-        <Image src="/Logo.png" alt="Logo" width={80} height={80} priority />
+        <Image src="/Logo2.png" alt="Logo" width={80} height={80} priority />
 
         <Box
           width="100%"
