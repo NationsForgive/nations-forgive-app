@@ -164,13 +164,13 @@ export default function Home() {
               >
                 <Box display="flex" flexDirection="column">
                   <Typography variant="body1" textAlign="justify">
-                    Somos una organización que funge como "Fundraising
-                    Platform", dedicada a la recaudación de recursos financieros
-                    y no financieros para proyectos sociales y humanitarios, que
-                    están enfocados hacia comunidades venezolanas en condiciones
-                    críticas y de extrema pobreza, que son fomentados y
-                    gestionados desde la comunidad cristiana con sede en
-                    Venezuela.
+                    Somos una organización que funge como &quot;Fundraising
+                    Platform&quot;, dedicada a la recaudación de recursos
+                    financieros y no financieros para proyectos sociales y
+                    humanitarios, que están enfocados hacia comunidades
+                    venezolanas en condiciones críticas y de extrema pobreza,
+                    que son fomentados y gestionados desde la comunidad
+                    cristiana con sede en Venezuela.
                   </Typography>
                   <Paper
                     elevation={5}
