@@ -2,8 +2,8 @@ import paypal from "@paypal/checkout-server-sdk";
 import { NextResponse } from "next/server";
 
 let environment = new paypal.core.SandboxEnvironment(
-  "AakmnZiH8p1Z65aHNsHbyf-xP7D1FYot0jjhYDuCnpe4DBqNuwEr5A0zRRQgKiSrkjtcypI17t58ueCy",
-  "EDhqv5C1s5GzNQthOPEzXK1CuRPzLeOUG37ScSDj-XH0JTF2niMA4JHOEmKmEIrd1SZJL7BEzkWIMLdw"
+  process.env.PAYPAL_CLIENT_ID as string,
+  process.env.PAYPAL_CLIENT_SECRET as string
 );
 let client = new paypal.core.PayPalHttpClient(environment);
 
