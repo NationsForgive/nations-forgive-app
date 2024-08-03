@@ -10,8 +10,12 @@ import {
   Modal,
   Snackbar,
   Alert,
+  Paper,
+  Typography,
+  IconButton,
 } from "@mui/material";
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js";
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import axios from "axios";
 import Image from "next/image";
 import { Dispatch, SetStateAction, useState } from "react";
@@ -25,6 +29,7 @@ const DEFAULT_VALUES_FORM = {
   methodOfPayment: "",
   message: null,
   anonymous: false,
+  paymentReference: null,
 };
 
 export default function DonationModal(props: {
@@ -60,7 +65,15 @@ export default function DonationModal(props: {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(getValues()),
+        body: JSON.stringify({
+          ...getValues(),
+          methodOfPayment:
+            getValues("methodOfPayment") !== "paypal"
+              ? `${getValues("methodOfPayment")} (Nro Referencia: ${getValues(
+                  "paymentReference"
+                )})`
+              : getValues("methodOfPayment"),
+        }),
       });
 
       // handle success
@@ -174,10 +187,58 @@ export default function DonationModal(props: {
               >
                 <MenuItem value="paypal">Paypal</MenuItem>
                 <MenuItem value="zelle">Transferencia Zelle</MenuItem>
-                <MenuItem value="usdt">Transferencia USDT</MenuItem>
+                {/* <MenuItem value="usdt">Transferencia USDT</MenuItem> */}
               </TextField>
             </Grid>
           </Grid>
+          {watch("methodOfPayment") === "zelle" ? (
+            <Box width="100%">
+              <Paper elevation={1}>
+                <Box
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
+                  padding={1.5}
+                  marginBottom={1}
+                >
+                  <Typography variant="subtitle1" marginRight={1}>
+                    emailZelle@email.com
+                  </Typography>
+                  <IconButton
+                    onClick={() => {
+                      navigator.clipboard.writeText("emailZelle@email.com");
+                      setOpenSnackbar({
+                        isOpen: true,
+                        isError: false,
+                        message: "Email copiado en portapapeles",
+                      });
+                      setTimeout(
+                        () =>
+                          setOpenSnackbar({
+                            isOpen: false,
+                            isError: false,
+                            message: "",
+                          }),
+                        1500
+                      );
+                    }}
+                  >
+                    <ContentCopyIcon />
+                  </IconButton>
+                </Box>
+              </Paper>
+              <TextField
+                {...register("paymentReference", { required: true })}
+                size="small"
+                placeholder="Nro de referencia de la transaccion"
+                type="text"
+                required
+                fullWidth
+                sx={{ backgroundColor: "#fff" }}
+                error={getFieldState("paymentReference").error ? true : false}
+              />
+            </Box>
+          ) : null}
           <TextField
             {...register("message")}
             size="small"
@@ -214,7 +275,7 @@ export default function DonationModal(props: {
                 } else {
                   setOpenSnackbar({
                     isOpen: true,
-                    isError: false,
+                    isError: true,
                     message:
                       "Verifique que todos los campos esten correctamente rellenos",
                   });
@@ -238,7 +299,7 @@ export default function DonationModal(props: {
               } else {
                 setOpenSnackbar({
                   isOpen: true,
-                  isError: false,
+                  isError: true,
                   message:
                     "Verifique que todos los campos esten correctamente rellenos",
                 });
@@ -251,14 +312,22 @@ export default function DonationModal(props: {
         <Button
           variant="text"
           sx={{ width: "150px" }}
-          onClick={() => props.setOpenModal(false)}
+          onClick={() => {
+            reset(DEFAULT_VALUES_FORM);
+            setOpenSnackbar({
+              isOpen: false,
+              isError: false,
+              message: "",
+            });
+            props.setOpenModal(false);
+          }}
         >
           Cancelar
         </Button>
         <Snackbar
           anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
           open={openSnackbar.isOpen}
-          autoHideDuration={3000}
+          autoHideDuration={2000}
         >
           <Alert
             severity={openSnackbar.isError ? "warning" : "success"}

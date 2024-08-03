@@ -122,6 +122,7 @@ export default function Home() {
               },
             }}
             alignItems="center"
+            height="175px"
           >
             {metricsData.map((e, index) => (
               <Paper

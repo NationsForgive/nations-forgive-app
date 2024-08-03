@@ -72,9 +72,9 @@ function htmlForOrganization(requestBody: EmailTemplateProps) {
         La persona de nombre: ${
           requestBody.name
         }, ha realizado la contribución a
-        través del canal {requestBody.methodOfPayment} de una cantidad USD
-        ${requestBody.contribution}
-        .
+        través del canal ${requestBody.methodOfPayment} de una cantidad USD
+        ${requestBody.contribution}.
+        <br />
         <br />
         <br />
         Adicional la persona de nombre ${requestBody.name}, ha decidido que su
